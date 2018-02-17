@@ -6,7 +6,7 @@ require('dotenv').config()
 passport.use(new Strategy({
   consumerKey: process.env.CONSUMER_KEY,
   consumerSecret: process.env.CONSUMER_SECRET,
-  callbackURL: 'http://localhost:8080/login/return'
+  callbackURL: 'https://vast-coast-12235.herokuapp.com/login/return'
 },
 function (token, tokenSecret, profile, cb) {
   return cb(null, profile)
