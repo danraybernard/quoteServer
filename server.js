@@ -32,11 +32,9 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.get('/',
-  function (req, res) {
+  function (req, res, next) {
     res.send(req.user)
   }
-    .catch(console.error('this errored out')
-    )
 )
 
 app.get('/login',
