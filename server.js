@@ -28,13 +28,13 @@ app.use(require('cookie-parser')())
 app.use(require('body-parser').urlencoded({ extended: true }))
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }))
 
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization')
-  res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS')
+// app.use(function (req, res, next) {
+//   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization')
+//   res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS')
 
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  next()
-})
+//   res.setHeader('Access-Control-Allow-Origin', '*')
+//   next()
+// })
 
 // app.use(cors())
 // app.options('*', cors())
