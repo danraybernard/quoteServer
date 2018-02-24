@@ -29,7 +29,6 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: false, save
 
 app.use(passport.initialize())
 app.use(passport.session())
-app.options('/getUser', cors({origin: 'http://localhost:3000'}))
 
 app.get('/getUser', cors({credentials: true, origin: 'http://localhost:3000'}),
   function (req, res, next) {
