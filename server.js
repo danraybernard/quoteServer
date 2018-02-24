@@ -21,47 +21,20 @@ passport.deserializeUser(function (obj, cb) {
 })
 
 var app = express()
-var corsOptions = {
-  'origin': 'http://localhost:3000',
-  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  'optionsSuccessStatus': 200,
-  'allowedHeaders': 'Access-Control-Allow-Origin'
-}
-
-// app.use(function (req, res, next) {
-//   res.header('Access-Control-Allow-Origin', req.get('Origin') || '*')
-//   res.header('Access-Control-Allow-Credentials', 'true')
-//   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
-//   res.header('Access-Control-Expose-Headers', 'Content-Length')
-//   res.header('Access-Control-Allow-Headers', 'Access-Control-Allow-Origin, Accept, Authorization, Content-Type, X-Requested-With, Range')
-//   if (req.method === 'OPTIONS') {
-//     console.log(req.method)
-//     res.send(200)
-//   } else {
-//     return next()
-//   }
-// })
 
 app.use(require('morgan')('combined'))
 app.use(require('cookie-parser')())
 app.use(require('body-parser').urlencoded({ extended: true }))
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }))
+app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: true }))
 
 app.use(passport.initialize())
 app.use(passport.session())
-// app.options('*', cors())
-// app.use(cors())
-app.get('/getUser',
+app.options('/getUser', cors({origin: 'http://localhost:3000'}))
+
+app.get('/getUser', cors({credentials: true, origin: 'http://localhost:3000'}),
   function (req, res, next) {
-    if (req.user) {
-      req.session.user = req.user
-      console.log(req.user.username)
-      setTimeout(() => {
-        res.status(200).send(req.user)
-      }, 100)
-    } else {
-      next()
-    }
+    console.log('hello', req.user.username)
+    res.status(200).send(req.user)
   }
 )
 
