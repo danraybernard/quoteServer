@@ -32,7 +32,6 @@ app.use(passport.session())
 
 app.get('/getUser', cors({credentials: true, origin: 'http://localhost:3000'}),
   function (req, res, next) {
-    console.log('hello', req.user.username)
     res.status(200).send(req.user)
   }
 )
@@ -47,6 +46,19 @@ app.get('/login/return',
   function (req, res) {
     // res.json(req.user)
     res.redirect('http://localhost:3000')
+  })
+
+// app.options('*', cors())
+
+// app.get('/logout', cors({credentials: true, origin: 'http://localhost:3000'}),
+//   function (req, res) {
+//     console.log('hello')
+//   }
+// )
+app.get('/logout', cors({credentials: true, origin: 'http://localhost:3000'}),
+  function (req, res) {
+    req.logout()
+    res.redirect('/')
   })
 
 app.use(function (err, req, res, next) {
